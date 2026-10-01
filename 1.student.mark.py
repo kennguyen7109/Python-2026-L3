@@ -21,7 +21,7 @@ def input_student_info():
 def input_number_of_course():
     return int(input("Enter number of courses: "))
 def input_course_info():
-    number_courses = input_number_of_students()
+    number_courses = input_number_of_course()
     for i in range (number_courses):
         print(f"\n----Courses Information #{i+1}----")
         course_id = input("Course ID: ").strip()
@@ -61,7 +61,7 @@ def list_courses():
         print("No course information found!")
         return
     for c in course:
-        print(f"ID: {c['id']: < 10}\nCourse name: {c['name']}")
+        print(f"ID: {c['id']}\nCourse name: {c['name']}")
 
 def list_students():
     print("\n----List of students----")
@@ -69,7 +69,7 @@ def list_students():
         print("No students information found!")
         return
     for s in students:
-        print(f"ID: {s['id']: < 10}\nName: {s['name']}\nDate of birth: {s['dob']}")
+        print(f"ID: {s['id']}\nName: {s['name']}\nDate of birth: {s['dob']}")
 
 def show_student_marks():
     if not marks:
