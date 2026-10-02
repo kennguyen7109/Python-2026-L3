@@ -31,36 +31,36 @@ class StudentManageMentSystem:
         self.__students = []
         self.__courses = []
         self.__marks = {}
-    def help_inputcurses(self, stdcsr, prompt): #function to take input from user using curses library
-        stdcsr.addstr(prompt) #show prompt to user (stdcsr = standard screen)
-        stdcsr.refresh() #update the screen to user
+    def help_inputcurses(self, stdscr, prompt): #function to take input from user using curses library
+        stdscr.addstr(prompt) #show prompt to user (stdscr = standard screen)
+        stdscr.refresh() #update the screen to user
         curses.echo() #turn on echoing of characters typed by user
-        user_input = stdcsr.getstr().decode() #get input from user and decode it to string
+        user_input = stdscr.getstr().decode() #get input from user and decode it to string
         curses.noecho() #turn off echoing of characters typed by user to not inerrupt the screen
         return user_input #return the input from user
-    def wait_keypress(self, stdcsr): #function to wait for user to press any key
-        stdcsr.addstr("\nPress any key to continue...") #show message to user 
-        stdcsr.refresh() 
-        stdcsr.getch() #wait for user to press any key
-    def input_students(self, stdcsr):
-        stdcsr.clear() #clear the screen
-        stdcsr.addstr("---Input Student Information---")
+    def wait_keypress(self, stdscr): #function to wait for user to press any key
+        stdscr.addstr("\nPress any key to continue...") #show message to user 
+        stdscr.refresh() 
+        stdscr.getch() #wait for user to press any key
+    def input_students(self, stdscr):
+        stdscr.clear() #clear the screen
+        stdscr.addstr("---Input Student Information---")
         try:
-            count = int(self.help_inputcurses(stdcsr, "\nEnter number of students in a class: ")) #user enter number of students and convert to interger
+            count = int(self.help_inputcurses(stdscr, "\nEnter number of students in a class: ")) #user enter number of students and convert to interger
         except ValueError:
-            stdcsr.addstr("\nInvalid input! Please enter a valid number!")
-            self.wait_keypress(stdcsr)
+            stdscr.addstr("\nInvalid input! Please enter a valid number!")
+            self.wait_keypress(stdscr)
             return
         for i in range(count):
-            stdcsr.clear()
-            stdcsr.addstr(f"----Student Information #{i+1}----")
-            student_id = self.help_inputcurses(stdcsr, "\nStudent ID: ")
-            student_name = self.help_inputcurses(stdcsr, "Name: ")
-            student_dob = self.help_inputcurses(stdcsr, "Date of birth (DD/MM/YYYY): ")
+            stdscr.clear()
+            stdscr.addstr(f"----Student Information #{i+1}----")
+            student_id = self.help_inputcurses(stdscr, "\nStudent ID: ")
+            student_name = self.help_inputcurses(stdscr, "Name: ")
+            student_dob = self.help_inputcurses(stdscr, "Date of birth (DD/MM/YYYY): ")
             student = Student(student_id, student_name, student_dob) #create new student
             self.__students.append(student) #add new student to the students list
-        stdcsr.addstr("\nStudent Information input completed successfully!")
-        self.wait_keypress(stdcsr)
+        stdscr.addstr("\nStudent Information input completed successfully!")
+        self.wait_keypress(stdscr)
     def input_courses(self, stdscr):
         stdscr.clear()
         stdscr.addstr("---Input Course Information---")
