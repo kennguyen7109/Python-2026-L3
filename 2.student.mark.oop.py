@@ -92,9 +92,8 @@ class StudentManagementSystem:
         print(f"\n----Input marks for course {selected_course_id}----")
         for student in self.__students:
             try:
-                mark = float(input(f"Marks for student {student.get.name()} (ID: {student.get.id()})"))
-                self.__marks[selected_course_id][student.get.id()] = mark
-                break
+                mark = float(input(f"Marks for student {student.get_name()} (ID: {student.get_id()}): "))
+                self.__marks[selected_course_id][student.get_id()] = mark
             except ValueError:
                 print("Invalid input! Please enter a valid number!")
     def list_students(self):
@@ -123,7 +122,7 @@ class StudentManagementSystem:
         for student in self.__students:
             student_id = student.get.id()
             mark = self.__marks[selected_course_id].get(student_id, "N/A")
-            print(f"Student ID: {student_id}, Name: {student.get.name()}, Mark: {mark}")
+            print(f"Student ID: {student_id}, Name: {student.get_name()}, Mark: {mark}")
     
     def run(self):
         while True:

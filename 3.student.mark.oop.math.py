@@ -109,16 +109,14 @@ class StudentManageMentSystem:
                     stdscr.addstr("\nInvalid mark! Please enter a valid number!")
         stdscr.addstr("\nMarks input completed successfully!")
         self.wait_keypress(stdscr)
-    def calculated_gpa(self, stdscr):
+    def calculated_gpa(self, student_id):
         mark_lists = []
         credits_list = []
         for course in self.__courses:
             course_id = course.get_id()
-            for student in self.__students:
-                student_id = student.get_id()
-                if course_id in self.__marks and student_id in self.__marks[course_id]:
-                    mark_lists.append(self.__marks[course_id][student_id])
-                    credits_list.append(course.get_credits())
+            if course_id in self.__marks and student_id in self.__marks[course_id]:
+                mark_lists.append(self.__marks[course_id][student_id])
+                credits_list.append(course.get_credits())
         if not credits_list or not sum(credits_list) == 0:
             return 0.0 #return 0.0 if there are no credits or the sum of credits is zero to avoid division by zero
         marks_np = np.array(mark_lists)
@@ -136,13 +134,14 @@ class StudentManageMentSystem:
         return sorted_students 
     def list_students(self, stdscr):
         stdscr.clear()
-        stdscr.addstr("---List of Students---")
+        stdscr.addstr("---List of Students (Sorted by GPA)---")
         if not self.__students:
             stdscr.addstr("\nNo students found!")
             self.wait_keypress(stdscr)
             return
-        for student in self.__students:
-            stdscr.addstr(f"\nID: {student.get_id()}, Name: {student.get_name()}, Date of Birth: {student.get_dob()}")
+        sorted_students = self.sort_students_by_gpa()
+        for student in sorted_students:
+            stdscr.addstr(f"\nID: {student.get_id()}, Name: {student.get_name()}, Date of Birth: {student.get_dob()}, GPA: {student.gpa:.2f}")
         self.wait_keypress(stdscr)
     def list_courses(self, stdscr):
         stdscr.clear()
@@ -167,10 +166,11 @@ class StudentManageMentSystem:
             self.wait_keypress(stdscr)
             return
         stdscr.addstr(f"\n----Marks for Courses {selected_course_id}----")
-        for course_id, marks in self.__marks.items():
-            stdscr.addstr(f"\nCourse ID: {course_id}")
-            for student_id, mark in marks.items():
-                stdscr.addstr(f"\nStudent ID: {student_id}, Mark: {mark}")
+        course_marks = self.__marks[selected_course_id]
+        for student in self.__students:
+            student_id = student.get_id()
+            mark = course_marks.get(student_id)
+            stdscr.addstr(f"\nStudent ID: {student_id}, Name: {student.get_name()} ,Mark: {mark}")
         self.wait_keypress(stdscr)
     def run(self, stdscr):
         curses.curs_set(1) #turn on the entering information
