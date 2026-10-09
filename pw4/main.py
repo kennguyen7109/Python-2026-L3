@@ -29,13 +29,13 @@ class StudentManageMentSystem:
                 elif choice == '2':
                     input_courses(stdscr, self.__courses, Course)
                 elif choice == '3':
-                    input_marks(stdscr, self.__marks, self.__courses, self.__students)
+                    input_marks(stdscr, self.__students, self.__courses, self.__marks)
                 elif choice == '4':
                     list_students(stdscr, self.__students, self.__courses, self.__marks)
                 elif choice == '5':
                     list_courses(stdscr, self.__courses)
                 elif choice == '6':
-                    list_marks(stdscr, self.__students, self.__marks, self.__courses)
+                    list_marks(stdscr, self.__students, self.__courses, self.__marks)
                 elif choice == '0':
                     break
 def main(stdscr):

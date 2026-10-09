@@ -1,16 +1,14 @@
 import numpy as np
 from input import help_inputcurses, wait_keypress
-def calculated_gpa(students, courses, marks):
+def calculated_gpa(student_id, courses, marks):
         mark_lists = []
         credits_list = []
         for course in courses:
             course_id = course.get_id()
-            for student in students:
-                student_id = student.get_id()
-                if course_id in marks and student_id in marks[course_id]:
-                    mark_lists.append(marks[course_id][student_id])
-                    credits_list.append(course.get_credits())
-        if not credits_list or not sum(credits_list) == 0:
+            if course_id in marks and student_id in marks[course_id]:
+                mark_lists.append(marks[course_id][student_id])
+                credits_list.append(course.get_credits())
+        if not credits_list or sum(credits_list) == 0:
             return 0.0 #return 0.0 if there are no credits or the sum of credits is zero to avoid division by zero
         marks_np = np.array(mark_lists)
         credits_np = np.array(credits_list)
@@ -44,7 +42,7 @@ def list_courses(stdscr, courses):
             return
         for course in courses:
             stdscr.addstr(f"\nID: {course.get_id()}, Name: {course.get_name()}, Credits: {course.get_credits()}")
-            wait_keypress(stdscr)
+        wait_keypress(stdscr)
 def list_marks(stdscr, students, courses, marks):
     stdscr.clear()
     stdscr.addstr("=== SHOW MARKS ===\n\n")
@@ -58,6 +56,7 @@ def list_marks(stdscr, students, courses, marks):
         wait_keypress(stdscr)
         return
     stdscr.addstr(f"\n---- Marks for Course {selected_course_id} ----\n")
+    course_marks = marks[selected_course_id]
     for student in students:
         s_id = student.get_id()
         mark = marks[selected_course_id].get(s_id, "N/A")
