@@ -9,7 +9,7 @@ def calculated_gpa(student_id, courses, marks):
                 mark_lists.append(marks[course_id][student_id])
                 credits_list.append(course.get_credits())
         if not credits_list or sum(credits_list) == 0:
-            return 0.0 #return 0.0 if there are no credits or the sum of credits is zero to avoid division by zero
+            return 0.0 #if there are no credits or the sum of credits is zero to avoid division by zero
         marks_np = np.array(mark_lists)
         credits_np = np.array(credits_list)
         gpa = np.sum(marks_np * credits_np) / np.sum(credits_np)
