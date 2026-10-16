@@ -10,7 +10,7 @@ mark_pkl = os.path.join(base_dir, "mark.pkl")
 
 def help_inputcurses(stdscr, prompt): #function to take input from user using curses library
         stdscr.addstr(prompt) #show prompt to user (stdscr = standard screen)
-        stdscr.refresh() #update the screen to user
+        stdscr.refresh() 
         curses.echo() #turn on echoing of characters typed by user
         user_input = stdscr.getstr().decode().strip() #get input from user and decode it to string
         curses.noecho() #turn off echoing of characters typed by user to not inerrupt the screen
