@@ -58,7 +58,7 @@ class StudentManageMentSystem:
             student_name = self.help_inputcurses(stdscr, "Name: ")
             student_dob = self.help_inputcurses(stdscr, "Date of birth (DD/MM/YYYY): ")
             student = Student(student_id, student_name, student_dob) #create new student
-            self.__students.append(student) #add new student to the students list
+            self.__students.append(student) #add new student to the students lists
         stdscr.addstr("\nStudent Information input completed successfully!")
         self.wait_keypress(stdscr)
     def input_courses(self, stdscr):
