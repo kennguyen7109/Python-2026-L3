@@ -2,7 +2,6 @@ students = []
 course = []
 marks = {}
 
-## INPUT FUNCTIONS
 def input_number_of_students():
     return int(input("Enter number of students in a class: "))
 def input_student_info():
