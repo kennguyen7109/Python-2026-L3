@@ -155,4 +155,4 @@ class StudentManagementSystem:
 
 if __name__ == "__main__": # run the program if this file is executed directly
     app = StudentManagementSystem() # create an instance of the StudentManagementSystem class
-    app.run() # call the run method to start the program
+    app.run() # call the run method to start program
